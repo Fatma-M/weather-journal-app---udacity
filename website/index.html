@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign In</title>
+    <script src="app.js" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="form-wrap">
+        <h1>Sign in</h1>
+        <div class="form-group">
+          <label> Enter Zipcode </label>
+          <input
+            type="number"
+            id="zipCode"
+            name="zip"
+            placeholder="Enter Zipcode here (ex: 85001)"
+          />
+        </div>
+        <div class="form-group">
+          <label> How are you feeling today? </label>
+          <input
+            type="text"
+            name="feel"
+            id="feelings"
+            placeholder="Enter your Feelings..."
+          />
+        </div>
+        <button id="generate" type="submit">Get Weather</button>
+      </div>
+    </div>
+    <div id="entry">
+      <div class="title">Most Recent Entry</div>
+      <div id="entryHolder">
+        <div>Date: <span id="date"></span></div>
+        <div>Temp: <span id="temp"></span></div>
+        <div>Content: <span id="content"></span></div>
+        <div>Feeling: <span id="feeling"></span></div>
+      </div>
+    </div>
+  </body>
+</html>
