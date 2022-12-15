@@ -5,18 +5,14 @@ const zipCode = document.getElementById("zipCode");
 const feelings = document.getElementById("feelings"); //
 
 // UI
-const date = document.getElementById("date"); //
-const temp = document.getElementById("temp"); //
-const content = document.getElementById("content"); //
 const button = document.getElementById("generate");
 const entry = document.getElementById("entry");
 
-// API
 const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
-const apiKey = "c7aff3a9c1fa29918571c087bf0f8328";
+const apiKey = "&appid=c7aff3a9c1fa29918571c087bf0f8328&units=imperial";
 
 let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+let newDate = d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
 
 // ADD EVENT LISTENER TO BUTTON
 button.addEventListener("click", performAction);
@@ -46,7 +42,7 @@ function performAction() {
 
 // GET DATA FROM API
 const getWeatherData = async (baseUrl, zipCode, apiKey) => {
-  const res = await fetch(`${baseUrl}${zipCode}&appid=${apiKey}`);
+  const res = await fetch(`${baseUrl}${zipCode}${apiKey}`);
   try {
     const data = await res.json();
     return data;
@@ -84,16 +80,11 @@ const updateUI = async () => {
   try {
     const allData = await request.json();
     console.log(allData);
-    if (
-      allData.date !== undefined &&
-      allData.temp !== undefined &&
-      allData.content !== undefined
-    ) {
-      date.innerHTML = allData.date;
-      temp.innerHTML = allData.temp + " degree ";
-      content.innerHTML = allData.content;
-      entry.style.display = "flex";
-    }
+    document.getElementById("temp").innerHTML =
+      Math.round(allData.temp) + "degrees";
+    document.getElementById("content").innerHTML = allData.content;
+    document.getElementById("date").innerHTML = allData.date;
+    entry.style.display = "flex";
   } catch (error) {
     console.log("error", error);
   }
