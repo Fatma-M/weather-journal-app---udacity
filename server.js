@@ -22,28 +22,26 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static("website"));
 
-// Server Setup
-const port = 8000;
-const server = app.listen(port, listening);
+// POST route
+app.post("/add", addInfo);
 
-function listening() {
-  console.log(`running on localhost: ${port}`);
+function addInfo(req, res) {
+  projectData["temp"] = req.body.temp;
+  projectData["date"] = req.body.date;
+  projectData["content"] = req.body.content;
+  res.send(projectData);
 }
 
-// Callback function to complete GET '/all'
+// Initialize all route with a callback function
 app.get("/all", getInfo);
 
+// Callback function to complete GET '/all'
 function getInfo(req, res) {
   res.send(projectData);
 }
 
-// Post Route
-const data = [];
-app.post("/add", addInfo);
-
-function addInfo(req, res) {
-  projectData["date"] = req.body.date;
-  projectData["temp"] = req.body.temp;
-  projectData["content"] = req.body.content;
-  res.send(projectData);
-}
+// Set up and Spin up the server
+const port = 8080;
+const server = app.listen(port, () => {
+  console.log(`server is listening on port: ${port}`);
+});
